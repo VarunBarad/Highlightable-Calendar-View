@@ -59,3 +59,8 @@ fun isPastDay(date: Date): Boolean {
 
     return date.before(calendar.time)
 }
+
+internal fun Calendar.getFullNameOfMonth(): String {
+    return this.getDisplayName(Calendar.MONTH, Calendar.LONG, Locale.getDefault())
+        ?: throw IllegalStateException()
+}
