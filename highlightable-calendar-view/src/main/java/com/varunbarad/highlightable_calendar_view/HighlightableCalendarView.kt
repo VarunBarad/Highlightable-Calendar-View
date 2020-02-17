@@ -25,6 +25,22 @@ class HighlightableCalendarView @JvmOverloads constructor(
         )
 
         this.updateCalendarDisplayedContents()
+
+        this.viewBinding.buttonPreviousMonth.setOnClickListener {
+            this.monthCalendar.add(Calendar.MONTH, -1)
+
+            this.updateCalendarDisplayedContents()
+
+            // ToDo: Call month-change-listener
+        }
+
+        this.viewBinding.buttonNextMonth.setOnClickListener {
+            this.monthCalendar.add(Calendar.MONTH, +1)
+
+            this.updateCalendarDisplayedContents()
+
+            // ToDo: Call month-change-listener
+        }
     }
 
     private fun updateCalendarDisplayedContents() {
