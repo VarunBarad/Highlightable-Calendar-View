@@ -1,2 +1,9 @@
 <resources>
+    <string name="label_dayOfWeek_short_sunday">Sun</string>
+    <string name="label_dayOfWeek_short_monday">Mon</string>
+    <string name="label_dayOfWeek_short_tuesday">Tue</string>
+    <string name="label_dayOfWeek_short_wednesday">Wed</string>
+    <string name="label_dayOfWeek_short_thursday">Thu</string>
+    <string name="label_dayOfWeek_short_friday">Fri</string>
+    <string name="label_dayOfWeek_short_saturday">Sat</string>
 </resources>
