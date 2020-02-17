@@ -2,6 +2,8 @@
 <resources>
     <!-- Date Title Layout -->
     <dimen name="dateTitleTextSize">18sp</dimen>
+    <dimen name="margin_titleText_horizontal">8dp</dimen>
+    <dimen name="minHeight_titleLayout">48dp</dimen>
 
     <!-- Week Layout -->
     <dimen name="dayOfWeekTextSize">16sp</dimen>

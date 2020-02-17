@@ -2,26 +2,24 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <androidx.appcompat.widget.LinearLayoutCompat
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <RelativeLayout
+        <LinearLayout
             android:id="@+id/titleLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="1dp"
-            android:paddingTop="@dimen/calendarTitlePaddingTop"
-            android:paddingBottom="@dimen/calendarTitlePaddingBottom">
+            android:gravity="center_vertical"
+            android:minHeight="@dimen/minHeight_titleLayout"
+            android:orientation="horizontal">
 
             <!-- ToDo: Tint these-->
-            <androidx.appcompat.widget.AppCompatImageView
+            <ImageView
                 android:id="@+id/button_previousMonth"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentStart="true"
-                android:layout_centerVertical="true"
+                android:layout_height="match_parent"
                 android:background="?attr/selectableItemBackground"
                 android:clickable="true"
                 android:focusable="true"
@@ -32,35 +30,35 @@
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/monthTitle"
                 style="@style/HighlightableCalendarView.MonthTitle"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
+                android:layout_marginStart="@dimen/margin_titleText_horizontal"
+                android:layout_marginEnd="@dimen/margin_titleText_horizontal"
+                android:layout_weight="1"
+                android:gravity="center"
                 android:layout_height="wrap_content"
-                android:layout_centerInParent="true"
                 android:textAllCaps="true"
+                android:text="May 2020"
                 tools:text="May 2020" />
 
             <!-- ToDo: Tint these-->
-            <androidx.appcompat.widget.AppCompatImageView
+            <ImageView
                 android:id="@+id/button_nextMonth"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentEnd="true"
-                android:layout_centerVertical="true"
+                android:layout_height="match_parent"
                 android:background="?attr/selectableItemBackground"
                 android:clickable="true"
                 android:focusable="true"
                 android:paddingStart="@dimen/padding"
                 android:paddingEnd="@dimen/padding"
                 android:src="@drawable/ic_arrow_right" />
-        </RelativeLayout>
+        </LinearLayout>
 
         <androidx.appcompat.widget.LinearLayoutCompat
             android:id="@+id/weekLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:orientation="horizontal"
-            android:paddingTop="@dimen/weekTitlePaddingTop"
-            android:paddingBottom="@dimen/weekTitlePaddingBottom">
+            android:orientation="horizontal">
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/weekDay_1"
@@ -539,5 +537,5 @@
                     android:text="42" />
             </androidx.appcompat.widget.LinearLayoutCompat>
         </androidx.appcompat.widget.LinearLayoutCompat>
-    </androidx.appcompat.widget.LinearLayoutCompat>
+    </LinearLayout>
 </layout>
