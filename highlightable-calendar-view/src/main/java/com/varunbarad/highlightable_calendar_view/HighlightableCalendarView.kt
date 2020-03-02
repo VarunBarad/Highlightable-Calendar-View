@@ -197,14 +197,14 @@ class HighlightableCalendarView @JvmOverloads constructor(
     }
 
     private fun numberOfRowsToDisplayInCurrentMonthCalendar(): Int {
-        val numberOfPreviousMonthDays = this.numberOfDaysOfPreviousMonthsToBeDisplayed()
+        val numberOfPreviousMonthDays = this.numberOfDaysOfPreviousMonthToBeDisplayed()
         val numberOfCurrentMonthDays = this.monthCalendar.getActualMaximum(Calendar.DAY_OF_MONTH)
         val numberOfNextMonthDays = this.numberOfDaysOfNextMonthToBeDisplayed()
 
         return ceil((numberOfPreviousMonthDays + numberOfCurrentMonthDays + numberOfNextMonthDays).toDouble() / 7.toDouble()).toInt()
     }
 
-    private fun numberOfDaysOfPreviousMonthsToBeDisplayed(): Int {
+    private fun numberOfDaysOfPreviousMonthToBeDisplayed(): Int {
         val tempCalendar = (this.monthCalendar.clone() as Calendar).apply {
             set(Calendar.DAY_OF_MONTH, 1)
         }
