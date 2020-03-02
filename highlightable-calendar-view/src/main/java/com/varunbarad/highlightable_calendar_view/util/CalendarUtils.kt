@@ -64,3 +64,17 @@ internal fun Calendar.getFullNameOfMonth(): String {
     return this.getDisplayName(Calendar.MONTH, Calendar.LONG, Locale.getDefault())
         ?: throw IllegalStateException()
 }
+
+internal fun Calendar.isThisCalendarOfPreviousMonthFrom(reference: Calendar): Boolean {
+    val temp = (reference.clone() as Calendar).apply {
+        add(Calendar.MONTH, -1)
+    }
+    return (temp.get(Calendar.MONTH) == this.get(Calendar.MONTH))
+}
+
+internal fun Calendar.isThisCalendarOfNextMonthFrom(reference: Calendar): Boolean {
+    val temp = (reference.clone() as Calendar).apply {
+        add(Calendar.MONTH, 1)
+    }
+    return (temp.get(Calendar.MONTH) == this.get(Calendar.MONTH))
+}

@@ -7,6 +7,8 @@ import android.view.LayoutInflater
 import android.widget.FrameLayout
 import com.varunbarad.highlightable_calendar_view.databinding.ViewHighlightableCalendarBinding
 import com.varunbarad.highlightable_calendar_view.util.getFullNameOfMonth
+import com.varunbarad.highlightable_calendar_view.util.isThisCalendarOfNextMonthFrom
+import com.varunbarad.highlightable_calendar_view.util.isThisCalendarOfPreviousMonthFrom
 import java.util.*
 import kotlin.math.ceil
 
@@ -77,6 +79,7 @@ class HighlightableCalendarView @JvmOverloads constructor(
             "${monthCalendar.getFullNameOfMonth()} ${monthCalendar.get(Calendar.YEAR)}"
 
         this.setWeekDayNames()
+        this.setMonthDayTexts()
     }
 
     private fun setWeekDayNames() {
@@ -196,6 +199,103 @@ class HighlightableCalendarView @JvmOverloads constructor(
         }
     }
 
+    private fun setMonthDayTexts() {
+        this.setRowVisibility(this.numberOfRowsToDisplayInCurrentMonthCalendar())
+
+        for (cellIndex in 1..this.numberOfDaysTotalToBeDisplayed()) {
+            val dayView = this.getDayViewForCellIndex(cellIndex)
+            val date = this.getDateForCellIndex(cellIndex)
+
+            dayView.text = "${date.get(Calendar.DAY_OF_MONTH)}"
+        }
+    }
+
+    private fun setRowVisibility(rowsToDisplay: Int) {
+        this.viewBinding.weekRow1.visibility = if (rowsToDisplay > 0) {
+            VISIBLE
+        } else {
+            GONE
+        }
+        this.viewBinding.weekRow2.visibility = if (rowsToDisplay > 1) {
+            VISIBLE
+        } else {
+            GONE
+        }
+        this.viewBinding.weekRow3.visibility = if (rowsToDisplay > 2) {
+            VISIBLE
+        } else {
+            GONE
+        }
+        this.viewBinding.weekRow4.visibility = if (rowsToDisplay > 3) {
+            VISIBLE
+        } else {
+            GONE
+        }
+        this.viewBinding.weekRow5.visibility = if (rowsToDisplay > 4) {
+            VISIBLE
+        } else {
+            GONE
+        }
+        this.viewBinding.weekRow6.visibility = if (rowsToDisplay > 5) {
+            VISIBLE
+        } else {
+            GONE
+        }
+    }
+
+    /**
+     * Returns day-view for cell index
+     *
+     * @param cellIndex Index of cell from 1 to 42
+     */
+    private fun getDayViewForCellIndex(cellIndex: Int): DayView {
+        return when (cellIndex) {
+            1 -> this.viewBinding.dayOfMonthText1
+            2 -> this.viewBinding.dayOfMonthText2
+            3 -> this.viewBinding.dayOfMonthText3
+            4 -> this.viewBinding.dayOfMonthText4
+            5 -> this.viewBinding.dayOfMonthText5
+            6 -> this.viewBinding.dayOfMonthText6
+            7 -> this.viewBinding.dayOfMonthText7
+            8 -> this.viewBinding.dayOfMonthText8
+            9 -> this.viewBinding.dayOfMonthText9
+            10 -> this.viewBinding.dayOfMonthText10
+            11 -> this.viewBinding.dayOfMonthText11
+            12 -> this.viewBinding.dayOfMonthText12
+            13 -> this.viewBinding.dayOfMonthText13
+            14 -> this.viewBinding.dayOfMonthText14
+            15 -> this.viewBinding.dayOfMonthText15
+            16 -> this.viewBinding.dayOfMonthText16
+            17 -> this.viewBinding.dayOfMonthText17
+            18 -> this.viewBinding.dayOfMonthText18
+            19 -> this.viewBinding.dayOfMonthText19
+            20 -> this.viewBinding.dayOfMonthText20
+            21 -> this.viewBinding.dayOfMonthText21
+            22 -> this.viewBinding.dayOfMonthText22
+            23 -> this.viewBinding.dayOfMonthText23
+            24 -> this.viewBinding.dayOfMonthText24
+            25 -> this.viewBinding.dayOfMonthText25
+            26 -> this.viewBinding.dayOfMonthText26
+            27 -> this.viewBinding.dayOfMonthText27
+            28 -> this.viewBinding.dayOfMonthText28
+            29 -> this.viewBinding.dayOfMonthText29
+            30 -> this.viewBinding.dayOfMonthText30
+            31 -> this.viewBinding.dayOfMonthText31
+            32 -> this.viewBinding.dayOfMonthText32
+            33 -> this.viewBinding.dayOfMonthText33
+            34 -> this.viewBinding.dayOfMonthText34
+            35 -> this.viewBinding.dayOfMonthText35
+            36 -> this.viewBinding.dayOfMonthText36
+            37 -> this.viewBinding.dayOfMonthText37
+            38 -> this.viewBinding.dayOfMonthText38
+            39 -> this.viewBinding.dayOfMonthText39
+            40 -> this.viewBinding.dayOfMonthText40
+            41 -> this.viewBinding.dayOfMonthText41
+            42 -> this.viewBinding.dayOfMonthText42
+            else -> throw IllegalArgumentException("Cell-Index: $cellIndex out of range (1-42)")
+        }
+    }
+
     private fun getDayViewForRowAndColumn(calendarGridRow: Int, calendarGridColumn: Int): DayView {
         return when (calendarGridRow) {
             0 -> {
@@ -282,6 +382,12 @@ class HighlightableCalendarView @JvmOverloads constructor(
         return ceil((numberOfPreviousMonthDays + numberOfCurrentMonthDays + numberOfNextMonthDays).toDouble() / 7.toDouble()).toInt()
     }
 
+    private fun numberOfDaysTotalToBeDisplayed(): Int {
+        return this.numberOfDaysOfPreviousMonthToBeDisplayed() +
+                this.monthCalendar.getActualMaximum(Calendar.DAY_OF_MONTH) +
+                this.numberOfDaysOfNextMonthToBeDisplayed()
+    }
+
     private fun numberOfDaysOfPreviousMonthToBeDisplayed(): Int {
         val tempCalendar = (this.monthCalendar.clone() as Calendar).apply {
             set(Calendar.DAY_OF_MONTH, 1)
@@ -304,6 +410,82 @@ class HighlightableCalendarView @JvmOverloads constructor(
         // and if column is 6 then 0 days of next month are displayed. Similar logic goes for all
         // values in between
         return (6 - this.getWeekColumnForDate(tempCalendar))
+    }
+
+    private fun getDateForCellIndex(cellIndex: Int): Calendar {
+        if (cellIndex <= this.numberOfDaysOfPreviousMonthToBeDisplayed()) {
+            val previousMonthCalendar = (this.monthCalendar.clone() as Calendar).apply {
+                add(Calendar.MONTH, -1)
+            }
+            val dayOfPreviousMonth =
+                previousMonthCalendar.getActualMaximum(Calendar.DAY_OF_MONTH) - this.numberOfDaysOfPreviousMonthToBeDisplayed() + cellIndex
+
+            previousMonthCalendar.set(Calendar.DAY_OF_MONTH, dayOfPreviousMonth)
+
+            return previousMonthCalendar
+        } else if (cellIndex <= (this.numberOfDaysOfPreviousMonthToBeDisplayed() + this.monthCalendar.getActualMaximum(
+                Calendar.DAY_OF_MONTH
+            ))
+        ) {
+            val tempCalendar = this.monthCalendar.clone() as Calendar
+            tempCalendar.set(
+                Calendar.DAY_OF_MONTH,
+                (cellIndex - this.numberOfDaysOfPreviousMonthToBeDisplayed())
+            )
+            return tempCalendar
+        } else if (cellIndex <= this.numberOfDaysTotalToBeDisplayed()) {
+            val nextMonthDate =
+                cellIndex - (this.numberOfDaysOfPreviousMonthToBeDisplayed() + this.monthCalendar.getActualMaximum(
+                    Calendar.DAY_OF_MONTH
+                ))
+
+            return (monthCalendar.clone() as Calendar).apply {
+                add(Calendar.MONTH, 1)
+                set(Calendar.DAY_OF_MONTH, nextMonthDate)
+            }
+        } else {
+            throw IllegalArgumentException() // ToDo: Add proper explanation
+        }
+    }
+
+    /**
+     * @return Index of cell, starting from 1 and ending at 42
+     */
+    private fun getIndexOfCellForDate(date: Calendar): Int {
+        val daysOfPreviousMonthToDisplay = this.numberOfDaysOfPreviousMonthToBeDisplayed()
+        val daysOfNextMonthToDisplay = this.numberOfDaysOfNextMonthToBeDisplayed()
+        return when {
+            date.isThisCalendarOfPreviousMonthFrom(this.monthCalendar) -> {
+                val lastDateOfPreviousMonth = date.getActualMaximum(Calendar.DAY_OF_MONTH)
+                val currentDate = date.get(Calendar.DAY_OF_MONTH)
+
+                val cellIndex =
+                    daysOfPreviousMonthToDisplay - (lastDateOfPreviousMonth - currentDate)
+                if (cellIndex > 0) {
+                    cellIndex
+                } else {
+                    throw IllegalStateException("This date shouldn't be displayed: $date")
+                }
+            }
+            date.isThisCalendarOfNextMonthFrom(this.monthCalendar) -> {
+                val daysInCurrentMonth = this.monthCalendar.getActualMaximum(Calendar.DAY_OF_MONTH)
+                val currentDate = date.get(Calendar.DAY_OF_MONTH)
+
+                if (currentDate > daysOfNextMonthToDisplay) {
+                    throw IllegalStateException("This date shouldn't be display: $date")
+                } else {
+                    val cellIndex = daysOfPreviousMonthToDisplay + daysInCurrentMonth + currentDate
+
+                    cellIndex
+                }
+            }
+            else -> {
+                val currentDate = date.get(Calendar.DAY_OF_MONTH)
+                val cellIndex = daysOfPreviousMonthToDisplay + currentDate
+
+                cellIndex
+            }
+        }
     }
 
     private fun getWeekColumnForDate(date: Calendar): Int {
