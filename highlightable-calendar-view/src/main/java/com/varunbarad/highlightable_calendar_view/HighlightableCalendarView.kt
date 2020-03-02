@@ -196,6 +196,84 @@ class HighlightableCalendarView @JvmOverloads constructor(
         }
     }
 
+    private fun getDayViewForRowAndColumn(calendarGridRow: Int, calendarGridColumn: Int): DayView {
+        return when (calendarGridRow) {
+            0 -> {
+                when (calendarGridColumn) {
+                    0 -> this.viewBinding.dayOfMonthText1
+                    1 -> this.viewBinding.dayOfMonthText2
+                    2 -> this.viewBinding.dayOfMonthText3
+                    3 -> this.viewBinding.dayOfMonthText4
+                    4 -> this.viewBinding.dayOfMonthText5
+                    5 -> this.viewBinding.dayOfMonthText6
+                    6 -> this.viewBinding.dayOfMonthText7
+                    else -> throw IllegalArgumentException("calendarColumn can only be from 0-6 and not $calendarGridColumn")
+                }
+            }
+            1 -> {
+                when (calendarGridColumn) {
+                    0 -> this.viewBinding.dayOfMonthText8
+                    1 -> this.viewBinding.dayOfMonthText9
+                    2 -> this.viewBinding.dayOfMonthText10
+                    3 -> this.viewBinding.dayOfMonthText11
+                    4 -> this.viewBinding.dayOfMonthText12
+                    5 -> this.viewBinding.dayOfMonthText13
+                    6 -> this.viewBinding.dayOfMonthText14
+                    else -> throw IllegalArgumentException("calendarColumn can only be from 0-6 and not $calendarGridColumn")
+                }
+            }
+            2 -> {
+                when (calendarGridColumn) {
+                    0 -> this.viewBinding.dayOfMonthText15
+                    1 -> this.viewBinding.dayOfMonthText16
+                    2 -> this.viewBinding.dayOfMonthText17
+                    3 -> this.viewBinding.dayOfMonthText18
+                    4 -> this.viewBinding.dayOfMonthText19
+                    5 -> this.viewBinding.dayOfMonthText20
+                    6 -> this.viewBinding.dayOfMonthText21
+                    else -> throw IllegalArgumentException("calendarColumn can only be from 0-6 and not $calendarGridColumn")
+                }
+            }
+            3 -> {
+                when (calendarGridColumn) {
+                    0 -> this.viewBinding.dayOfMonthText22
+                    1 -> this.viewBinding.dayOfMonthText23
+                    2 -> this.viewBinding.dayOfMonthText24
+                    3 -> this.viewBinding.dayOfMonthText25
+                    4 -> this.viewBinding.dayOfMonthText26
+                    5 -> this.viewBinding.dayOfMonthText27
+                    6 -> this.viewBinding.dayOfMonthText28
+                    else -> throw IllegalArgumentException("calendarColumn can only be from 0-6 and not $calendarGridColumn")
+                }
+            }
+            4 -> {
+                when (calendarGridColumn) {
+                    0 -> this.viewBinding.dayOfMonthText29
+                    1 -> this.viewBinding.dayOfMonthText30
+                    2 -> this.viewBinding.dayOfMonthText31
+                    3 -> this.viewBinding.dayOfMonthText32
+                    4 -> this.viewBinding.dayOfMonthText33
+                    5 -> this.viewBinding.dayOfMonthText34
+                    6 -> this.viewBinding.dayOfMonthText35
+                    else -> throw IllegalArgumentException("calendarColumn can only be from 0-6 and not $calendarGridColumn")
+                }
+            }
+            5 -> {
+                when (calendarGridColumn) {
+                    0 -> this.viewBinding.dayOfMonthText36
+                    1 -> this.viewBinding.dayOfMonthText37
+                    2 -> this.viewBinding.dayOfMonthText38
+                    3 -> this.viewBinding.dayOfMonthText39
+                    4 -> this.viewBinding.dayOfMonthText40
+                    5 -> this.viewBinding.dayOfMonthText41
+                    6 -> this.viewBinding.dayOfMonthText42
+                    else -> throw IllegalArgumentException("calendarColumn can only be from 0-6 and not $calendarGridColumn")
+                }
+            }
+            else -> throw IllegalArgumentException("calendarRow can only be from 0-5 and not $calendarGridRow")
+        }
+    }
+
     private fun numberOfRowsToDisplayInCurrentMonthCalendar(): Int {
         val numberOfPreviousMonthDays = this.numberOfDaysOfPreviousMonthToBeDisplayed()
         val numberOfCurrentMonthDays = this.monthCalendar.getActualMaximum(Calendar.DAY_OF_MONTH)
