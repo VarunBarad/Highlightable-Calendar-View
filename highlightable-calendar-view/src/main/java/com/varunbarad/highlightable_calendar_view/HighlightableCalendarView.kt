@@ -195,6 +195,17 @@ class HighlightableCalendarView @JvmOverloads constructor(
         }
     }
 
+    private fun numberOfDaysOfPreviousMonthsToBeDisplayed(): Int {
+        val tempCalendar = (this.monthCalendar.clone() as Calendar).apply {
+            set(Calendar.DAY_OF_MONTH, 1)
+        }
+
+        // Since if column for first day of month is 0 then no days of previous month are displayed
+        // and if column is 6 then 6 days of previous month are displayed. Same goes for all
+        // values in between
+        return this.getWeekColumnForDate(tempCalendar)
+    }
+
     private fun getWeekColumnForDate(date: Calendar): Int {
         val weekDay = this.getWeekDayForDate(date)
         return when (this.firstDayOfWeek) {
