@@ -194,4 +194,98 @@ class HighlightableCalendarView @JvmOverloads constructor(
             }
         }
     }
+
+    private fun getWeekColumnForDate(date: Calendar): Int {
+        val weekDay = this.getWeekDayForDate(date)
+        return when (this.firstDayOfWeek) {
+            DayOfWeek.SUNDAY -> {
+                when (weekDay) {
+                    Calendar.SUNDAY -> 0
+                    Calendar.MONDAY -> 1
+                    Calendar.TUESDAY -> 2
+                    Calendar.WEDNESDAY -> 3
+                    Calendar.THURSDAY -> 4
+                    Calendar.FRIDAY -> 5
+                    Calendar.SATURDAY -> 6
+                    else -> throw IllegalStateException("$weekDay should be from Sunday to Saturday only")
+                }
+            }
+            DayOfWeek.MONDAY -> {
+                when (weekDay) {
+                    Calendar.MONDAY -> 0
+                    Calendar.TUESDAY -> 1
+                    Calendar.WEDNESDAY -> 2
+                    Calendar.THURSDAY -> 3
+                    Calendar.FRIDAY -> 4
+                    Calendar.SATURDAY -> 5
+                    Calendar.SUNDAY -> 6
+                    else -> throw IllegalStateException("$weekDay should be from Sunday to Saturday only")
+                }
+            }
+            DayOfWeek.TUESDAY -> {
+                when (weekDay) {
+                    Calendar.TUESDAY -> 0
+                    Calendar.WEDNESDAY -> 1
+                    Calendar.THURSDAY -> 2
+                    Calendar.FRIDAY -> 3
+                    Calendar.SATURDAY -> 4
+                    Calendar.SUNDAY -> 5
+                    Calendar.MONDAY -> 6
+                    else -> throw IllegalStateException("$weekDay should be from Sunday to Saturday only")
+                }
+            }
+            DayOfWeek.WEDNESDAY -> {
+                when (weekDay) {
+                    Calendar.WEDNESDAY -> 0
+                    Calendar.THURSDAY -> 1
+                    Calendar.FRIDAY -> 2
+                    Calendar.SATURDAY -> 3
+                    Calendar.SUNDAY -> 4
+                    Calendar.MONDAY -> 5
+                    Calendar.TUESDAY -> 6
+                    else -> throw IllegalStateException("$weekDay should be from Sunday to Saturday only")
+                }
+            }
+            DayOfWeek.THURSDAY -> {
+                when (weekDay) {
+                    Calendar.THURSDAY -> 0
+                    Calendar.FRIDAY -> 1
+                    Calendar.SATURDAY -> 2
+                    Calendar.SUNDAY -> 3
+                    Calendar.MONDAY -> 4
+                    Calendar.TUESDAY -> 5
+                    Calendar.WEDNESDAY -> 6
+                    else -> throw IllegalStateException("$weekDay should be from Sunday to Saturday only")
+                }
+            }
+            DayOfWeek.FRIDAY -> {
+                when (weekDay) {
+                    Calendar.FRIDAY -> 0
+                    Calendar.SATURDAY -> 1
+                    Calendar.SUNDAY -> 2
+                    Calendar.MONDAY -> 3
+                    Calendar.TUESDAY -> 4
+                    Calendar.WEDNESDAY -> 5
+                    Calendar.THURSDAY -> 6
+                    else -> throw IllegalStateException("$weekDay should be from Sunday to Saturday only")
+                }
+            }
+            DayOfWeek.SATURDAY -> {
+                when (weekDay) {
+                    Calendar.SATURDAY -> 0
+                    Calendar.SUNDAY -> 1
+                    Calendar.MONDAY -> 2
+                    Calendar.TUESDAY -> 3
+                    Calendar.WEDNESDAY -> 4
+                    Calendar.THURSDAY -> 5
+                    Calendar.FRIDAY -> 6
+                    else -> throw IllegalStateException("$weekDay should be from Sunday to Saturday only")
+                }
+            }
+        }
+    }
+
+    private fun getWeekDayForDate(date: Calendar): Int {
+        return date.get(Calendar.DAY_OF_WEEK)
+    }
 }
