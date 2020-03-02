@@ -8,6 +8,7 @@ import android.widget.FrameLayout
 import com.varunbarad.highlightable_calendar_view.databinding.ViewHighlightableCalendarBinding
 import com.varunbarad.highlightable_calendar_view.util.getFullNameOfMonth
 import java.util.*
+import kotlin.math.ceil
 
 class HighlightableCalendarView @JvmOverloads constructor(
     context: Context,
@@ -193,6 +194,14 @@ class HighlightableCalendarView @JvmOverloads constructor(
                     context.resources.getString(R.string.label_dayOfWeek_short_friday)
             }
         }
+    }
+
+    private fun numberOfRowsToDisplayInCurrentMonthCalendar(): Int {
+        val numberOfPreviousMonthDays = this.numberOfDaysOfPreviousMonthsToBeDisplayed()
+        val numberOfCurrentMonthDays = this.monthCalendar.getActualMaximum(Calendar.DAY_OF_MONTH)
+        val numberOfNextMonthDays = this.numberOfDaysOfNextMonthToBeDisplayed()
+
+        return ceil((numberOfPreviousMonthDays + numberOfCurrentMonthDays + numberOfNextMonthDays).toDouble() / 7.toDouble()).toInt()
     }
 
     private fun numberOfDaysOfPreviousMonthsToBeDisplayed(): Int {
