@@ -206,6 +206,19 @@ class HighlightableCalendarView @JvmOverloads constructor(
         return this.getWeekColumnForDate(tempCalendar)
     }
 
+    private fun numberOfDaysOfNextMonthToBeDisplayed(): Int {
+        val tempCalendar = (this.monthCalendar.clone() as Calendar)
+        tempCalendar.set(
+            Calendar.DAY_OF_MONTH,
+            tempCalendar.getActualMaximum(Calendar.DAY_OF_MONTH)
+        )
+
+        // Since if column for last day of month is 0 then 6 days of next month are displayed
+        // and if column is 6 then 0 days of next month are displayed. Similar logic goes for all
+        // values in between
+        return (6 - this.getWeekColumnForDate(tempCalendar))
+    }
+
     private fun getWeekColumnForDate(date: Calendar): Int {
         val weekDay = this.getWeekDayForDate(date)
         return when (this.firstDayOfWeek) {
