@@ -9,4 +9,6 @@
     <string name="label_dayOfWeek_short_thursday">Thu</string>
     <string name="label_dayOfWeek_short_friday">Fri</string>
     <string name="label_dayOfWeek_short_saturday">Sat</string>
+
+    <string name="format_monthTitle">%1$s %2$s</string>
 </resources>
