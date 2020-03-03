@@ -7,10 +7,7 @@ import android.view.LayoutInflater
 import android.widget.FrameLayout
 import androidx.core.content.ContextCompat
 import com.varunbarad.highlightable_calendar_view.databinding.ViewHighlightableCalendarBinding
-import com.varunbarad.highlightable_calendar_view.util.getFullNameOfMonth
-import com.varunbarad.highlightable_calendar_view.util.isSameMonth
-import com.varunbarad.highlightable_calendar_view.util.isThisCalendarOfNextMonthFrom
-import com.varunbarad.highlightable_calendar_view.util.isThisCalendarOfPreviousMonthFrom
+import com.varunbarad.highlightable_calendar_view.util.*
 import java.util.*
 import kotlin.math.ceil
 
@@ -25,6 +22,12 @@ class HighlightableCalendarView @JvmOverloads constructor(
         set(value) {
             field = value
             this.monthCalendar.firstDayOfWeek = (value.ordinal + 1)
+            this.updateCalendarDisplayedContents()
+        }
+
+    var dayDecorators: List<DayDecorator> = emptyList()
+        set(value) {
+            field = value.sortedBy { it.date }
             this.updateCalendarDisplayedContents()
         }
 
@@ -80,6 +83,7 @@ class HighlightableCalendarView @JvmOverloads constructor(
         this.setMonthTitle()
         this.setWeekDayNames()
         this.setMonthDayTexts()
+        this.decorateMonthDays()
     }
 
     private fun setMonthTitle() {
@@ -245,6 +249,17 @@ class HighlightableCalendarView @JvmOverloads constructor(
                     )
                 )
             }
+        }
+    }
+
+    private fun decorateMonthDays() {
+        for (decorator in this.dayDecorators.filter { isDateDisplayedCurrently(it.date) }) {
+            val cellIndex = this.getIndexOfCellForDate(decorator.date)
+            val dayView = this.getDayViewForCellIndex(cellIndex)
+            dayView.decorate(
+                textColor = decorator.textColor,
+                backgroundColor = decorator.backgroundColor
+            )
         }
     }
 
@@ -618,5 +633,26 @@ class HighlightableCalendarView @JvmOverloads constructor(
 
     private fun getWeekDayForDate(date: Calendar): Int {
         return date.get(Calendar.DAY_OF_WEEK)
+    }
+
+    private fun isDateDisplayedCurrently(date: Calendar): Boolean {
+        val strippedDate = date.removeTime()
+
+        val minimumDisplayedDate = (this.monthCalendar.clone() as Calendar).apply {
+            set(Calendar.DAY_OF_MONTH, 1)
+            add(Calendar.DAY_OF_MONTH, (0 - numberOfDaysOfPreviousMonthToBeDisplayed()))
+            removeTime()
+        }
+        val maximumDisplayedDate = (this.monthCalendar.clone() as Calendar).apply {
+            set(Calendar.DAY_OF_MONTH, monthCalendar.getActualMaximum(Calendar.DAY_OF_MONTH))
+            add(Calendar.DAY_OF_MONTH, numberOfDaysOfNextMonthToBeDisplayed())
+            removeTime()
+        }
+
+        return ((strippedDate.after(minimumDisplayedDate) || strippedDate.isSameDay(
+            minimumDisplayedDate
+        )) && (strippedDate.before(maximumDisplayedDate) || strippedDate.isSameDay(
+            maximumDisplayedDate
+        )))
     }
 }
