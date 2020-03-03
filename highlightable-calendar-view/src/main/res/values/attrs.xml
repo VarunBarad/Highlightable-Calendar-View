@@ -13,6 +13,9 @@
             <enum name="saturday" value="6" />
         </attr>
 
+        <!-- Specify color with which you want to highlight current day's text -->
+        <attr name="dayTextColorCurrentDay" format="color" />
+
         <attr name="calendarTitleTextColor" format="color" />
         <attr name="dayOfWeekTextColor" format="color" />
         <attr name="dayOfMonthTextColor" format="color" />
@@ -23,6 +26,5 @@
         <attr name="dayTextColorSelected" format="color" />
         <attr name="weekLayoutBackgroundColor" format="color" />
         <attr name="titleLayoutBackgroundColor" format="color" />
-        <attr name="currentDayOfMonthColor" format="color" />
     </declare-styleable>
 </resources>

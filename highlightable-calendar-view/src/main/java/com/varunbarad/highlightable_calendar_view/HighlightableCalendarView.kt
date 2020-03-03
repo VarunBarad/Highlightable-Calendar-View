@@ -5,6 +5,7 @@ import android.content.res.TypedArray
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.widget.FrameLayout
+import androidx.annotation.ColorInt
 import androidx.core.content.ContextCompat
 import com.varunbarad.highlightable_calendar_view.databinding.ViewHighlightableCalendarBinding
 import com.varunbarad.highlightable_calendar_view.util.*
@@ -22,6 +23,13 @@ class HighlightableCalendarView @JvmOverloads constructor(
         set(value) {
             field = value
             this.monthCalendar.firstDayOfWeek = (value.ordinal + 1)
+            this.updateCalendarDisplayedContents()
+        }
+    @ColorInt
+    var dayTextColorCurrentDay: Int =
+        ContextCompat.getColor(this.context, R.color.day_textColor_currentDay)
+        set(value) {
+            field = value
             this.updateCalendarDisplayedContents()
         }
 
@@ -74,6 +82,10 @@ class HighlightableCalendarView @JvmOverloads constructor(
                 R.styleable.HighlightableCalendarView_firstDayOfWeek,
                 DayOfWeek.SUNDAY.ordinal
             )]
+            this.dayTextColorCurrentDay = attributeValues.getColor(
+                R.styleable.HighlightableCalendarView_dayTextColorCurrentDay,
+                ContextCompat.getColor(this.context, R.color.day_textColor_currentDay)
+            )
 
             attributeValues.recycle()
         }
@@ -83,6 +95,7 @@ class HighlightableCalendarView @JvmOverloads constructor(
         this.setMonthTitle()
         this.setWeekDayNames()
         this.setMonthDayTexts()
+        this.highlightCurrentDay()
         this.decorateMonthDays()
     }
 
@@ -249,6 +262,16 @@ class HighlightableCalendarView @JvmOverloads constructor(
                     )
                 )
             }
+        }
+    }
+
+    private fun highlightCurrentDay() {
+        val currentDayDate = Calendar.getInstance().removeTime()
+        if (isDateDisplayedCurrently(currentDayDate)) {
+            val cellIndex = this.getIndexOfCellForDate(currentDayDate)
+            val dayView = this.getDayViewForCellIndex(cellIndex)
+
+            dayView.setTextColor(this.dayTextColorCurrentDay)
         }
     }
 
