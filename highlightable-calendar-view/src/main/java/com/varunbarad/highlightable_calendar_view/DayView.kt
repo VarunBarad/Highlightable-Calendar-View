@@ -3,6 +3,7 @@ package com.varunbarad.highlightable_calendar_view
 import android.content.Context
 import android.util.AttributeSet
 import android.widget.TextView
+import androidx.annotation.ColorInt
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -13,7 +14,6 @@ class DayView @JvmOverloads constructor(
 ) : TextView(context, attrs, defStyleAttr) {
     var date: Calendar? = null
         private set
-    private var decorators: List<DayDecorator> = emptyList()
 
     private val dateFormat = SimpleDateFormat("dd", Locale.getDefault())
 
@@ -23,7 +23,8 @@ class DayView @JvmOverloads constructor(
         this.text = this.dateFormat.format(date.time)
     }
 
-    fun decorate() {
-        this.decorators.forEach { it.decorate(this) }
+    internal fun decorate(@ColorInt textColor: Int, @ColorInt backgroundColor: Int) {
+        this.setTextColor(textColor)
+        this.setBackgroundColor(backgroundColor)
     }
 }
