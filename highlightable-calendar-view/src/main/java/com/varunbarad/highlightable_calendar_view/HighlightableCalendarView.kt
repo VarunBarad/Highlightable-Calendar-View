@@ -77,14 +77,17 @@ class HighlightableCalendarView @JvmOverloads constructor(
     }
 
     private fun updateCalendarDisplayedContents() {
+        this.setMonthTitle()
+        this.setWeekDayNames()
+        this.setMonthDayTexts()
+    }
+
+    private fun setMonthTitle() {
         this.viewBinding.monthTitle.text = this.context.resources.getString(
             R.string.format_monthTitle,
             monthCalendar.getFullNameOfMonth(),
             monthCalendar.get(Calendar.YEAR).toString()
         )
-
-        this.setWeekDayNames()
-        this.setMonthDayTexts()
     }
 
     private fun setWeekDayNames() {
