@@ -214,7 +214,7 @@ class HighlightableCalendarView @JvmOverloads constructor(
             val dayView = this.getDayViewForCellIndex(cellIndex)
             val date = this.getDateForCellIndex(cellIndex)
 
-            dayView.text = "${date.get(Calendar.DAY_OF_MONTH)}"
+            dayView.bind(date)
 
             if (!monthCalendar.isSameMonth(date)) {
                 // ToDo: Apply non-current-month style

@@ -11,17 +11,16 @@ class DayView @JvmOverloads constructor(
     attrs: AttributeSet? = null,
     defStyleAttr: Int = 0
 ) : TextView(context, attrs, defStyleAttr) {
-    var date: Date? = null
+    var date: Calendar? = null
         private set
     private var decorators: List<DayDecorator> = emptyList()
 
     private val dateFormat = SimpleDateFormat("dd", Locale.getDefault())
 
-    fun bind(date: Date, decorators: List<DayDecorator>) {
+    internal fun bind(date: Calendar) {
         this.date = date
-        this.decorators = decorators
 
-        this.text = this.dateFormat.format(date)
+        this.text = this.dateFormat.format(date.time)
     }
 
     fun decorate() {
