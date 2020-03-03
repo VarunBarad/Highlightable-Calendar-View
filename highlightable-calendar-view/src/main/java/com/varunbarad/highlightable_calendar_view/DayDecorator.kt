@@ -2,6 +2,7 @@ package com.varunbarad.highlightable_calendar_view
 
 import androidx.annotation.ColorInt
 import com.varunbarad.highlightable_calendar_view.util.isSameDay
+import com.varunbarad.highlightable_calendar_view.util.removeTime
 import java.util.*
 
 class DayDecorator(
@@ -9,12 +10,7 @@ class DayDecorator(
     @ColorInt val textColor: Int,
     @ColorInt val backgroundColor: Int
 ) {
-    val date: Calendar = (date.clone() as Calendar).apply {
-        set(Calendar.HOUR_OF_DAY, 0)
-        set(Calendar.MINUTE, 0)
-        set(Calendar.SECOND, 0)
-        set(Calendar.MILLISECOND, 0)
-    }
+    val date: Calendar = (date.clone() as Calendar).removeTime()
 
     fun clone(): DayDecorator {
         return DayDecorator(

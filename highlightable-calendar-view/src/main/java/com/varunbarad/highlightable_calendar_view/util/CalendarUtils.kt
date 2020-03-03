@@ -46,12 +46,7 @@ internal fun Calendar.isToday(): Boolean {
  * @return true if the passed date is older than today, false otherwise
  */
 fun isPastDay(date: Date): Boolean {
-    val calendar = Calendar.getInstance().apply {
-        set(Calendar.HOUR_OF_DAY, 0)
-        set(Calendar.MINUTE, 0)
-        set(Calendar.SECOND, 0)
-        set(Calendar.MILLISECOND, 0)
-    }
+    val calendar = Calendar.getInstance().removeTime()
 
     return date.before(calendar.time)
 }
@@ -73,4 +68,13 @@ internal fun Calendar.isThisCalendarOfNextMonthFrom(reference: Calendar): Boolea
         add(Calendar.MONTH, 1)
     }
     return (temp.get(Calendar.MONTH) == this.get(Calendar.MONTH))
+}
+
+internal fun Calendar.removeTime(): Calendar {
+    return this.apply {
+        set(Calendar.HOUR_OF_DAY, 0)
+        set(Calendar.MINUTE, 0)
+        set(Calendar.SECOND, 0)
+        set(Calendar.MILLISECOND, 0)
+    }
 }
