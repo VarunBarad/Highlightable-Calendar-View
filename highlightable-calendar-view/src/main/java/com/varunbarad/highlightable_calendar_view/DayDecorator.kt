@@ -4,7 +4,7 @@ import androidx.annotation.ColorInt
 import com.varunbarad.highlightable_calendar_view.util.isSameDay
 import java.util.*
 
-class DayProperties(
+class DayDecorator(
     date: Calendar,
     @ColorInt val textColor: Int,
     @ColorInt val backgroundColor: Int
@@ -16,8 +16,8 @@ class DayProperties(
         set(Calendar.MILLISECOND, 0)
     }
 
-    fun clone(): DayProperties {
-        return DayProperties(
+    fun clone(): DayDecorator {
+        return DayDecorator(
             date = (this.date.clone() as Calendar),
             textColor = this.textColor,
             backgroundColor = this.backgroundColor
@@ -25,7 +25,7 @@ class DayProperties(
     }
 
     override fun equals(other: Any?): Boolean {
-        return if ((other != null) && (other is DayProperties)) {
+        return if ((other != null) && (other is DayDecorator)) {
             this.date.isSameDay(other.date) && (this.textColor == other.textColor) && (this.backgroundColor == other.backgroundColor)
         } else {
             false
