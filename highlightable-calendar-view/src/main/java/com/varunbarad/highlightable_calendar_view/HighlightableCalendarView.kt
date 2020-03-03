@@ -5,8 +5,10 @@ import android.content.res.TypedArray
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.widget.FrameLayout
+import androidx.core.content.ContextCompat
 import com.varunbarad.highlightable_calendar_view.databinding.ViewHighlightableCalendarBinding
 import com.varunbarad.highlightable_calendar_view.util.getFullNameOfMonth
+import com.varunbarad.highlightable_calendar_view.util.isSameMonth
 import com.varunbarad.highlightable_calendar_view.util.isThisCalendarOfNextMonthFrom
 import com.varunbarad.highlightable_calendar_view.util.isThisCalendarOfPreviousMonthFrom
 import java.util.*
@@ -207,6 +209,36 @@ class HighlightableCalendarView @JvmOverloads constructor(
             val date = this.getDateForCellIndex(cellIndex)
 
             dayView.text = "${date.get(Calendar.DAY_OF_MONTH)}"
+
+            if (!monthCalendar.isSameMonth(date)) {
+                // ToDo: Apply non-current-month style
+                dayView.setBackgroundColor(
+                    ContextCompat.getColor(
+                        this.context,
+                        R.color.day_backgroundColor_disabled
+                    )
+                )
+                dayView.setTextColor(
+                    ContextCompat.getColor(
+                        this.context,
+                        R.color.day_textColor_disabled
+                    )
+                )
+            } else {
+                // ToDo: Apply current-month style
+                dayView.setBackgroundColor(
+                    ContextCompat.getColor(
+                        this.context,
+                        R.color.day_backgroundColor_enabled
+                    )
+                )
+                dayView.setTextColor(
+                    ContextCompat.getColor(
+                        this.context,
+                        R.color.day_textColor_enabled
+                    )
+                )
+            }
         }
     }
 
