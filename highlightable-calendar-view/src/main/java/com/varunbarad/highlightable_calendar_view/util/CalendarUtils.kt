@@ -7,39 +7,35 @@ import java.util.*
 /**
  * Checks if both dates fall under same month
  *
- * @param c1 first date
- * @param c2 second date
+ * @param other date to compare against
  *
  * @return true if both are in same month, false otherwise
  */
-fun isSameMonth(c1: Calendar, c2: Calendar): Boolean {
-    return ((c1.get(Calendar.ERA) == c2.get(Calendar.ERA))
-            && (c1.get(Calendar.YEAR) == c2.get(Calendar.YEAR))
-            && (c1.get(Calendar.MONTH) == c2.get(Calendar.MONTH)))
+internal fun Calendar.isSameMonth(other: Calendar): Boolean {
+    return ((this.get(Calendar.ERA) == other.get(Calendar.ERA))
+            && (this.get(Calendar.YEAR) == other.get(Calendar.YEAR))
+            && (this.get(Calendar.MONTH) == other.get(Calendar.MONTH)))
 }
 
 /**
  * Checks if both dates are for same day
  *
- * @param c1 first date
- * @param c2 second date
+ * @param other date to compare against
  *
  * @return true if both are for same date, false otherwise
  */
-fun isSameDay(c1: Calendar, c2: Calendar): Boolean {
-    return isSameMonth(c1, c2) && (c1.get(Calendar.DATE) == c2.get(Calendar.DATE))
+internal fun Calendar.isSameDay(other: Calendar): Boolean {
+    return this.isSameMonth(other) && (this.get(Calendar.DAY_OF_MONTH) == other.get(Calendar.DAY_OF_MONTH))
 }
 
 
 /**
- * Checks if the date is for today
- *
- * @param calendar date to check
+ * Checks if this date is for today
  *
  * @return true if the date is of today
  */
-fun isToday(calendar: Calendar): Boolean {
-    return isSameDay(calendar, Calendar.getInstance())
+internal fun Calendar.isToday(): Boolean {
+    return this.isSameDay(Calendar.getInstance())
 }
 
 /**
