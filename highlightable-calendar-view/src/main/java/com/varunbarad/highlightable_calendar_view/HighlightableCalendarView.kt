@@ -41,6 +41,8 @@ class HighlightableCalendarView @JvmOverloads constructor(
 
     private val monthCalendar: Calendar = Calendar.getInstance()
 
+    var onMonthChangeListener: OnMonthChangeListener? = null
+
     init {
         this.viewBinding = ViewHighlightableCalendarBinding.inflate(
             LayoutInflater.from(context),
@@ -55,7 +57,17 @@ class HighlightableCalendarView @JvmOverloads constructor(
 
             this.updateCalendarDisplayedContents()
 
-            // ToDo: Call month-change-listener
+            this.onMonthChangeListener?.onMonthChanged(
+                (this.monthCalendar.clone() as Calendar).apply {
+                    removeTime()
+                    add(Calendar.MONTH, 1)
+                    set(Calendar.DAY_OF_MONTH, 1)
+                },
+                (this.monthCalendar.clone() as Calendar).apply {
+                    removeTime()
+                    set(Calendar.DAY_OF_MONTH, 1)
+                }
+            )
         }
 
         this.viewBinding.buttonNextMonth.setOnClickListener {
@@ -63,7 +75,17 @@ class HighlightableCalendarView @JvmOverloads constructor(
 
             this.updateCalendarDisplayedContents()
 
-            // ToDo: Call month-change-listener
+            this.onMonthChangeListener?.onMonthChanged(
+                (this.monthCalendar.clone() as Calendar).apply {
+                    removeTime()
+                    add(Calendar.MONTH, -1)
+                    set(Calendar.DAY_OF_MONTH, 1)
+                },
+                (this.monthCalendar.clone() as Calendar).apply {
+                    removeTime()
+                    set(Calendar.DAY_OF_MONTH, 1)
+                }
+            )
         }
 
         this.updateCalendarDisplayedContents()
