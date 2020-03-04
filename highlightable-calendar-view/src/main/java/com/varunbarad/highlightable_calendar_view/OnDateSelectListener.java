@@ -1,7 +1,7 @@
 package com.varunbarad.highlightable_calendar_view;
 
-import java.util.Date;
+import java.util.Calendar;
 
 public interface OnDateSelectListener {
-    void onDateSelected(Date date);
+    void onDateSelected(Calendar date);
 }
