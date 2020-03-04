@@ -1,8 +1,7 @@
 package com.varunbarad.highlightable_calendar_view;
 
-import java.util.Date;
+import java.util.Calendar;
 
 public interface OnMonthChangeListener {
-    // ToDo: Find a way to pass old and new months to this
-    void onMonthChanged(Date time);
+    void onMonthChanged(Calendar oldMonth, Calendar newMonth);
 }
