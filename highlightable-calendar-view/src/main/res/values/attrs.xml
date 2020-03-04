@@ -20,6 +20,10 @@
         <attr name="dayTextColorDisabled" format="color" />
         <attr name="dayBackgroundColorDisabled" format="color" />
 
+        <!-- Specify colors for days which are in current month -->
+        <attr name="dayTextColorEnabled" format="color" />
+        <attr name="dayBackgroundColorEnabled" format="color" />
+
         <attr name="calendarTitleTextColor" format="color" />
         <attr name="dayOfWeekTextColor" format="color" />
         <attr name="dayOfMonthTextColor" format="color" />

@@ -46,6 +46,20 @@ class HighlightableCalendarView @JvmOverloads constructor(
             field = value
             this.updateCalendarDisplayedContents()
         }
+    @ColorInt
+    var dayTextColorEnabled: Int =
+        ContextCompat.getColor(this.context, R.color.day_textColor_enabled)
+        set(value) {
+            field = value
+            this.updateCalendarDisplayedContents()
+        }
+    @ColorInt
+    var dayBackgroundColorEnabled: Int =
+        ContextCompat.getColor(this.context, R.color.day_backgroundColor_enabled)
+        set(value) {
+            field = value
+            this.updateCalendarDisplayedContents()
+        }
 
     var dayDecorators: List<DayDecorator> = emptyList()
         set(value) {
@@ -129,6 +143,14 @@ class HighlightableCalendarView @JvmOverloads constructor(
             this.dayBackgroundColorDisabled = attributeValues.getColor(
                 R.styleable.HighlightableCalendarView_dayBackgroundColorDisabled,
                 ContextCompat.getColor(this.context, R.color.day_backgroundColor_disabled)
+            )
+            this.dayTextColorEnabled = attributeValues.getColor(
+                R.styleable.HighlightableCalendarView_dayTextColorEnabled,
+                ContextCompat.getColor(this.context, R.color.day_textColor_enabled)
+            )
+            this.dayBackgroundColorEnabled = attributeValues.getColor(
+                R.styleable.HighlightableCalendarView_dayBackgroundColorEnabled,
+                ContextCompat.getColor(this.context, R.color.day_backgroundColor_enabled)
             )
 
             attributeValues.recycle()
@@ -281,19 +303,8 @@ class HighlightableCalendarView @JvmOverloads constructor(
                 dayView.setBackgroundColor(this.dayTextColorDisabled)
                 dayView.setTextColor(this.dayBackgroundColorDisabled)
             } else {
-                // ToDo: Apply current-month style
-                dayView.setBackgroundColor(
-                    ContextCompat.getColor(
-                        this.context,
-                        R.color.day_backgroundColor_enabled
-                    )
-                )
-                dayView.setTextColor(
-                    ContextCompat.getColor(
-                        this.context,
-                        R.color.day_textColor_enabled
-                    )
-                )
+                dayView.setBackgroundColor(this.dayBackgroundColorEnabled)
+                dayView.setTextColor(this.dayTextColorEnabled)
             }
         }
     }
