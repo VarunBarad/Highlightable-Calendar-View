@@ -32,6 +32,20 @@ class HighlightableCalendarView @JvmOverloads constructor(
             field = value
             this.updateCalendarDisplayedContents()
         }
+    @ColorInt
+    var dayTextColorDisabled: Int =
+        ContextCompat.getColor(this.context, R.color.day_textColor_disabled)
+        set(value) {
+            field = value
+            this.updateCalendarDisplayedContents()
+        }
+    @ColorInt
+    var dayBackgroundColorDisabled: Int =
+        ContextCompat.getColor(this.context, R.color.day_backgroundColor_disabled)
+        set(value) {
+            field = value
+            this.updateCalendarDisplayedContents()
+        }
 
     var dayDecorators: List<DayDecorator> = emptyList()
         set(value) {
@@ -107,6 +121,14 @@ class HighlightableCalendarView @JvmOverloads constructor(
             this.dayTextColorCurrentDay = attributeValues.getColor(
                 R.styleable.HighlightableCalendarView_dayTextColorCurrentDay,
                 ContextCompat.getColor(this.context, R.color.day_textColor_currentDay)
+            )
+            this.dayTextColorDisabled = attributeValues.getColor(
+                R.styleable.HighlightableCalendarView_dayTextColorDisabled,
+                ContextCompat.getColor(this.context, R.color.day_textColor_disabled)
+            )
+            this.dayBackgroundColorDisabled = attributeValues.getColor(
+                R.styleable.HighlightableCalendarView_dayBackgroundColorDisabled,
+                ContextCompat.getColor(this.context, R.color.day_backgroundColor_disabled)
             )
 
             attributeValues.recycle()
@@ -256,19 +278,8 @@ class HighlightableCalendarView @JvmOverloads constructor(
             dayView.bind(date)
 
             if (!monthCalendar.isSameMonth(date)) {
-                // ToDo: Apply non-current-month style
-                dayView.setBackgroundColor(
-                    ContextCompat.getColor(
-                        this.context,
-                        R.color.day_backgroundColor_disabled
-                    )
-                )
-                dayView.setTextColor(
-                    ContextCompat.getColor(
-                        this.context,
-                        R.color.day_textColor_disabled
-                    )
-                )
+                dayView.setBackgroundColor(this.dayTextColorDisabled)
+                dayView.setTextColor(this.dayBackgroundColorDisabled)
             } else {
                 // ToDo: Apply current-month style
                 dayView.setBackgroundColor(

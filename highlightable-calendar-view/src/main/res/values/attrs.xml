@@ -16,12 +16,14 @@
         <!-- Specify color with which you want to highlight current day's text -->
         <attr name="dayTextColorCurrentDay" format="color" />
 
+        <!-- Specify colors for days which are not in current month -->
+        <attr name="dayTextColorDisabled" format="color" />
+        <attr name="dayBackgroundColorDisabled" format="color" />
+
         <attr name="calendarTitleTextColor" format="color" />
         <attr name="dayOfWeekTextColor" format="color" />
         <attr name="dayOfMonthTextColor" format="color" />
         <attr name="calendarBackgroundColor" format="color" />
-        <attr name="dayBackgroundColorDisabled" format="color" />
-        <attr name="dayTextColorDisabled" format="color" />
         <attr name="dayBackgroundColorSelected" format="color" />
         <attr name="dayTextColorSelected" format="color" />
         <attr name="weekLayoutBackgroundColor" format="color" />
