@@ -300,8 +300,8 @@ class HighlightableCalendarView @JvmOverloads constructor(
             dayView.bind(date)
 
             if (!monthCalendar.isSameMonth(date)) {
-                dayView.setBackgroundColor(this.dayTextColorDisabled)
-                dayView.setTextColor(this.dayBackgroundColorDisabled)
+                dayView.setBackgroundColor(this.dayBackgroundColorDisabled)
+                dayView.setTextColor(this.dayTextColorDisabled)
             } else {
                 dayView.setBackgroundColor(this.dayBackgroundColorEnabled)
                 dayView.setTextColor(this.dayTextColorEnabled)
