@@ -4,6 +4,8 @@
     <color name="black">#000000</color>
     <color name="darkGrey">#222222</color>
 
+    <color name="monthNameTitle_textColor">#1e1e1e</color>
+
     <color name="day_textColor_currentDay">#03a7e9</color>
 
     <color name="day_textColor_disabled">#aeaeae</color>

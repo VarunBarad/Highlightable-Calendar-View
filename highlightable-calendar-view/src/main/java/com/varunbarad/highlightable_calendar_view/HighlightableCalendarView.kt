@@ -25,6 +25,14 @@ class HighlightableCalendarView @JvmOverloads constructor(
             this.monthCalendar.firstDayOfWeek = (value.ordinal + 1)
             this.updateCalendarDisplayedContents()
         }
+
+    @ColorInt
+    var monthNameTitleTextColor: Int =
+        ContextCompat.getColor(this.context, R.color.monthNameTitle_textColor)
+        set(value) {
+            field = value
+            this.updateCalendarDisplayedContents()
+        }
     @ColorInt
     var dayTextColorCurrentDay: Int =
         ContextCompat.getColor(this.context, R.color.day_textColor_currentDay)
@@ -132,6 +140,10 @@ class HighlightableCalendarView @JvmOverloads constructor(
                 R.styleable.HighlightableCalendarView_firstDayOfWeek,
                 DayOfWeek.SUNDAY.ordinal
             )]
+            this.monthNameTitleTextColor = attributeValues.getColor(
+                R.styleable.HighlightableCalendarView_monthNameTitleTextColor,
+                ContextCompat.getColor(this.context, R.color.monthNameTitle_textColor)
+            )
             this.dayTextColorCurrentDay = attributeValues.getColor(
                 R.styleable.HighlightableCalendarView_dayTextColorCurrentDay,
                 ContextCompat.getColor(this.context, R.color.day_textColor_currentDay)
@@ -171,6 +183,8 @@ class HighlightableCalendarView @JvmOverloads constructor(
             monthCalendar.getFullNameOfMonth(),
             monthCalendar.get(Calendar.YEAR).toString()
         )
+
+        this.viewBinding.monthTitle.setTextColor(this.monthNameTitleTextColor)
     }
 
     private fun setWeekDayNames() {

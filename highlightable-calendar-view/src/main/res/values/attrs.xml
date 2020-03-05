@@ -24,7 +24,9 @@
         <attr name="dayTextColorEnabled" format="color" />
         <attr name="dayBackgroundColorEnabled" format="color" />
 
-        <attr name="calendarTitleTextColor" format="color" />
+        <!-- Specify color for month-name title -->
+        <attr name="monthNameTitleTextColor" format="color" />
+
         <attr name="dayOfWeekTextColor" format="color" />
         <attr name="dayOfMonthTextColor" format="color" />
         <attr name="calendarBackgroundColor" format="color" />
