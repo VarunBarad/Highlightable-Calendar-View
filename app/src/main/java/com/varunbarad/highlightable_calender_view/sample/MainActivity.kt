@@ -7,6 +7,7 @@ import androidx.core.content.ContextCompat
 import com.varunbarad.highlightable_calendar_view.DayDecorator
 import com.varunbarad.highlightable_calendar_view.HighlightableCalendarView
 import com.varunbarad.highlightable_calendar_view.OnDateSelectListener
+import com.varunbarad.highlightable_calendar_view.OnMonthChangeListener
 import java.util.*
 
 class MainActivity : AppCompatActivity() {
@@ -32,6 +33,22 @@ class MainActivity : AppCompatActivity() {
                 ContextCompat.getColor(this, R.color.colorAccent)
             )
         )
+
+        calendarView.onMonthChangeListener = OnMonthChangeListener { oldMonth, newMonth ->
+            Toast.makeText(
+                this,
+                "${oldMonth.getDisplayName(
+                    Calendar.MONTH,
+                    Calendar.LONG,
+                    Locale.getDefault()
+                )} -> ${newMonth.getDisplayName(
+                    Calendar.MONTH,
+                    Calendar.LONG,
+                    Locale.getDefault()
+                )}",
+                Toast.LENGTH_SHORT
+            ).show()
+        }
 
         calendarView.onDateSelectListener = OnDateSelectListener { selectedDate ->
             Toast.makeText(
