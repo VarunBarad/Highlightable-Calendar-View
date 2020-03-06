@@ -33,6 +33,15 @@ class HighlightableCalendarView @JvmOverloads constructor(
             field = value
             this.updateCalendarDisplayedContents()
         }
+
+    @ColorInt
+    var titleBackgroundColor: Int =
+        ContextCompat.getColor(this.context, R.color.title_backgroundColor)
+        set(value) {
+            field = value
+            this.updateCalendarDisplayedContents()
+        }
+
     @ColorInt
     var dayTextColorCurrentDay: Int =
         ContextCompat.getColor(this.context, R.color.day_textColor_currentDay)
@@ -40,6 +49,7 @@ class HighlightableCalendarView @JvmOverloads constructor(
             field = value
             this.updateCalendarDisplayedContents()
         }
+
     @ColorInt
     var dayTextColorDisabled: Int =
         ContextCompat.getColor(this.context, R.color.day_textColor_disabled)
@@ -47,6 +57,7 @@ class HighlightableCalendarView @JvmOverloads constructor(
             field = value
             this.updateCalendarDisplayedContents()
         }
+
     @ColorInt
     var dayBackgroundColorDisabled: Int =
         ContextCompat.getColor(this.context, R.color.day_backgroundColor_disabled)
@@ -54,6 +65,7 @@ class HighlightableCalendarView @JvmOverloads constructor(
             field = value
             this.updateCalendarDisplayedContents()
         }
+
     @ColorInt
     var dayTextColorEnabled: Int =
         ContextCompat.getColor(this.context, R.color.day_textColor_enabled)
@@ -61,6 +73,7 @@ class HighlightableCalendarView @JvmOverloads constructor(
             field = value
             this.updateCalendarDisplayedContents()
         }
+
     @ColorInt
     var dayBackgroundColorEnabled: Int =
         ContextCompat.getColor(this.context, R.color.day_backgroundColor_enabled)
@@ -144,6 +157,10 @@ class HighlightableCalendarView @JvmOverloads constructor(
                 R.styleable.HighlightableCalendarView_titleTextColor,
                 ContextCompat.getColor(this.context, R.color.title_textColor)
             )
+            this.titleBackgroundColor = attributeValues.getColor(
+                R.styleable.HighlightableCalendarView_titleBackgroundColor,
+                ContextCompat.getColor(this.context, R.color.title_backgroundColor)
+            )
             this.dayTextColorCurrentDay = attributeValues.getColor(
                 R.styleable.HighlightableCalendarView_dayTextColorCurrentDay,
                 ContextCompat.getColor(this.context, R.color.day_textColor_currentDay)
@@ -185,6 +202,7 @@ class HighlightableCalendarView @JvmOverloads constructor(
         )
 
         this.viewBinding.monthTitle.setTextColor(this.titleTextColor)
+        this.viewBinding.titleLayout.setBackgroundColor(this.titleBackgroundColor)
     }
 
     private fun setWeekDayNames() {

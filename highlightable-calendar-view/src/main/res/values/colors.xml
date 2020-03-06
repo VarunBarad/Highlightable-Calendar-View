@@ -3,8 +3,10 @@
     <color name="white">#ffffff</color>
     <color name="black">#000000</color>
     <color name="darkGrey">#222222</color>
+    <color name="transparent">#00ffffff</color>
 
     <color name="title_textColor">#1e1e1e</color>
+    <color name="title_backgroundColor">@color/transparent</color>
 
     <color name="day_textColor_currentDay">#03a7e9</color>
 

@@ -26,6 +26,8 @@
 
         <!-- Specify color for month-name title -->
         <attr name="titleTextColor" format="color" />
+        <!-- Specify background color for title -->
+        <attr name="titleBackgroundColor" format="color" />
 
         <attr name="dayOfWeekTextColor" format="color" />
         <attr name="dayOfMonthTextColor" format="color" />
@@ -33,6 +35,5 @@
         <attr name="dayBackgroundColorSelected" format="color" />
         <attr name="dayTextColorSelected" format="color" />
         <attr name="weekLayoutBackgroundColor" format="color" />
-        <attr name="titleLayoutBackgroundColor" format="color" />
     </declare-styleable>
 </resources>
