@@ -10,6 +10,7 @@
     <color name="title_monthChangeButtonTint">@color/black</color>
 
     <color name="weekDay_backgroundColor">@color/transparent</color>
+    <color name="weekDay_textColor">@color/black</color>
 
     <color name="day_textColor_currentDay">#03a7e9</color>
 

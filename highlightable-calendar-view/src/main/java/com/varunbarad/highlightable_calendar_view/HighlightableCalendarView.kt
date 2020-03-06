@@ -60,6 +60,14 @@ class HighlightableCalendarView @JvmOverloads constructor(
         }
 
     @ColorInt
+    var weekDayTextColor: Int =
+        ContextCompat.getColor(this.context, R.color.weekDay_textColor)
+        set(value) {
+            field = value
+            this.updateCalendarDisplayedContents()
+        }
+
+    @ColorInt
     var dayTextColorCurrentDay: Int =
         ContextCompat.getColor(this.context, R.color.day_textColor_currentDay)
         set(value) {
@@ -186,6 +194,10 @@ class HighlightableCalendarView @JvmOverloads constructor(
             this.weekDayBackgroundColor = attributeValues.getColor(
                 R.styleable.HighlightableCalendarView_weekDay_backgroundColor,
                 ContextCompat.getColor(this.context, R.color.weekDay_backgroundColor)
+            )
+            this.weekDayTextColor = attributeValues.getColor(
+                R.styleable.HighlightableCalendarView_weekDay_textColor,
+                ContextCompat.getColor(this.context, R.color.weekDay_textColor)
             )
 
             this.dayTextColorCurrentDay = attributeValues.getColor(
@@ -355,6 +367,13 @@ class HighlightableCalendarView @JvmOverloads constructor(
         }
 
         this.viewBinding.weekLayout.setBackgroundColor(this.weekDayBackgroundColor)
+        this.viewBinding.weekDay1.setTextColor(this.weekDayTextColor)
+        this.viewBinding.weekDay2.setTextColor(this.weekDayTextColor)
+        this.viewBinding.weekDay3.setTextColor(this.weekDayTextColor)
+        this.viewBinding.weekDay4.setTextColor(this.weekDayTextColor)
+        this.viewBinding.weekDay5.setTextColor(this.weekDayTextColor)
+        this.viewBinding.weekDay6.setTextColor(this.weekDayTextColor)
+        this.viewBinding.weekDay7.setTextColor(this.weekDayTextColor)
     }
 
     private fun setMonthDayTexts() {
