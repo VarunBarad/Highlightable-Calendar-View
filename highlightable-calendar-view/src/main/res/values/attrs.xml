@@ -35,8 +35,6 @@
         <attr name="weekDay_backgroundColor" format="color" />
         <attr name="weekDay_textColor" format="color" />
 
-        <attr name="dayOfMonthTextColor" format="color" />
-        <attr name="calendarBackgroundColor" format="color" />
         <attr name="dayBackgroundColorSelected" format="color" />
         <attr name="dayTextColorSelected" format="color" />
     </declare-styleable>
