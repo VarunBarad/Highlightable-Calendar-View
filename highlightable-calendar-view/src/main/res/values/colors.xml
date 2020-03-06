@@ -7,6 +7,7 @@
 
     <color name="title_textColor">#1e1e1e</color>
     <color name="title_backgroundColor">@color/transparent</color>
+    <color name="title_monthChangeButtonTint">@color/black</color>
 
     <color name="day_textColor_currentDay">#03a7e9</color>
 

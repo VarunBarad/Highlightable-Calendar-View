@@ -20,5 +20,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:titleBackgroundColor="@color/colorAccent"
+        app:titleMonthChangeButtonTint="@color/colorPrimary"
         app:titleTextColor="@color/colorPrimary" />
 </androidx.constraintlayout.widget.ConstraintLayout>

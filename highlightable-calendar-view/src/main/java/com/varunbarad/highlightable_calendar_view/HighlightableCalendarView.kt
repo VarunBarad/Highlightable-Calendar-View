@@ -1,6 +1,7 @@
 package com.varunbarad.highlightable_calendar_view
 
 import android.content.Context
+import android.content.res.ColorStateList
 import android.content.res.TypedArray
 import android.util.AttributeSet
 import android.view.LayoutInflater
@@ -37,6 +38,14 @@ class HighlightableCalendarView @JvmOverloads constructor(
     @ColorInt
     var titleBackgroundColor: Int =
         ContextCompat.getColor(this.context, R.color.title_backgroundColor)
+        set(value) {
+            field = value
+            this.updateCalendarDisplayedContents()
+        }
+
+    @ColorInt
+    var titleMonthChangeButtonTint: Int =
+        ContextCompat.getColor(this.context, R.color.title_monthChangeButtonTint)
         set(value) {
             field = value
             this.updateCalendarDisplayedContents()
@@ -161,6 +170,10 @@ class HighlightableCalendarView @JvmOverloads constructor(
                 R.styleable.HighlightableCalendarView_titleBackgroundColor,
                 ContextCompat.getColor(this.context, R.color.title_backgroundColor)
             )
+            this.titleMonthChangeButtonTint = attributeValues.getColor(
+                R.styleable.HighlightableCalendarView_titleMonthChangeButtonTint,
+                ContextCompat.getColor(this.context, R.color.title_monthChangeButtonTint)
+            )
             this.dayTextColorCurrentDay = attributeValues.getColor(
                 R.styleable.HighlightableCalendarView_dayTextColorCurrentDay,
                 ContextCompat.getColor(this.context, R.color.day_textColor_currentDay)
@@ -203,6 +216,12 @@ class HighlightableCalendarView @JvmOverloads constructor(
 
         this.viewBinding.monthTitle.setTextColor(this.titleTextColor)
         this.viewBinding.titleLayout.setBackgroundColor(this.titleBackgroundColor)
+        this.viewBinding.buttonPreviousMonth.imageTintList = ColorStateList.valueOf(
+            this.titleMonthChangeButtonTint
+        )
+        this.viewBinding.buttonNextMonth.imageTintList = ColorStateList.valueOf(
+            this.titleMonthChangeButtonTint
+        )
     }
 
     private fun setWeekDayNames() {
