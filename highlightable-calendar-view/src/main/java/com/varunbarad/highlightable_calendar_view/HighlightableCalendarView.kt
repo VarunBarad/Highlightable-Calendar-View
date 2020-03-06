@@ -107,14 +107,36 @@ class HighlightableCalendarView @JvmOverloads constructor(
             this.updateCalendarDisplayedContents()
         }
 
+    @ColorInt
+    var selectedDayBackgroundColor: Int =
+        ContextCompat.getColor(this.context, R.color.selectedDay_backgroundColor)
+        set(value) {
+            field = value
+            this.updateCalendarDisplayedContents()
+        }
+
+    @ColorInt
+    var selectedDayTextColor: Int =
+        ContextCompat.getColor(this.context, R.color.selectedDay_textColor)
+        set(value) {
+            field = value
+            this.updateCalendarDisplayedContents()
+        }
+
     var dayDecorators: List<DayDecorator> = emptyList()
         set(value) {
             field = value.sortedBy { it.date }
             this.updateCalendarDisplayedContents()
         }
+    var selectedDay: Calendar? = null
+        set(value) {
+            field = value?.removeTime()
+            this.updateCalendarDisplayedContents()
+        }
 
     private val monthCalendar: Calendar = Calendar.getInstance()
 
+    var onDateSelectListener: OnDateSelectListener? = null
     var onMonthChangeListener: OnMonthChangeListener? = null
 
     init {
@@ -128,6 +150,7 @@ class HighlightableCalendarView @JvmOverloads constructor(
 
         this.viewBinding.buttonPreviousMonth.setOnClickListener {
             this.monthCalendar.add(Calendar.MONTH, -1)
+            this.selectedDay = null
 
             this.updateCalendarDisplayedContents()
 
@@ -146,6 +169,7 @@ class HighlightableCalendarView @JvmOverloads constructor(
 
         this.viewBinding.buttonNextMonth.setOnClickListener {
             this.monthCalendar.add(Calendar.MONTH, +1)
+            this.selectedDay = null
 
             this.updateCalendarDisplayedContents()
 
@@ -161,6 +185,8 @@ class HighlightableCalendarView @JvmOverloads constructor(
                 }
             )
         }
+
+        this.setDayClickListeners()
 
         this.updateCalendarDisplayedContents()
     }
@@ -220,9 +246,69 @@ class HighlightableCalendarView @JvmOverloads constructor(
                 R.styleable.HighlightableCalendarView_dayBackgroundColorEnabled,
                 ContextCompat.getColor(this.context, R.color.day_backgroundColor_enabled)
             )
+            this.selectedDayBackgroundColor = attributeValues.getColor(
+                R.styleable.HighlightableCalendarView_selectedDay_backgroundColor,
+                ContextCompat.getColor(this.context, R.color.selectedDay_backgroundColor)
+            )
+            this.selectedDayTextColor = attributeValues.getColor(
+                R.styleable.HighlightableCalendarView_selectedDay_textColor,
+                ContextCompat.getColor(this.context, R.color.selectedDay_textColor)
+            )
 
             attributeValues.recycle()
         }
+    }
+
+    private fun setDayClickListeners() {
+        this.viewBinding.dayOfMonthText1.setOnClickListener { this.onClickDayView(1) }
+        this.viewBinding.dayOfMonthText2.setOnClickListener { this.onClickDayView(2) }
+        this.viewBinding.dayOfMonthText3.setOnClickListener { this.onClickDayView(3) }
+        this.viewBinding.dayOfMonthText4.setOnClickListener { this.onClickDayView(4) }
+        this.viewBinding.dayOfMonthText5.setOnClickListener { this.onClickDayView(5) }
+        this.viewBinding.dayOfMonthText6.setOnClickListener { this.onClickDayView(6) }
+        this.viewBinding.dayOfMonthText7.setOnClickListener { this.onClickDayView(7) }
+        this.viewBinding.dayOfMonthText8.setOnClickListener { this.onClickDayView(8) }
+        this.viewBinding.dayOfMonthText9.setOnClickListener { this.onClickDayView(9) }
+        this.viewBinding.dayOfMonthText10.setOnClickListener { this.onClickDayView(10) }
+        this.viewBinding.dayOfMonthText11.setOnClickListener { this.onClickDayView(11) }
+        this.viewBinding.dayOfMonthText12.setOnClickListener { this.onClickDayView(12) }
+        this.viewBinding.dayOfMonthText13.setOnClickListener { this.onClickDayView(13) }
+        this.viewBinding.dayOfMonthText14.setOnClickListener { this.onClickDayView(14) }
+        this.viewBinding.dayOfMonthText15.setOnClickListener { this.onClickDayView(15) }
+        this.viewBinding.dayOfMonthText16.setOnClickListener { this.onClickDayView(16) }
+        this.viewBinding.dayOfMonthText17.setOnClickListener { this.onClickDayView(17) }
+        this.viewBinding.dayOfMonthText18.setOnClickListener { this.onClickDayView(18) }
+        this.viewBinding.dayOfMonthText19.setOnClickListener { this.onClickDayView(19) }
+        this.viewBinding.dayOfMonthText20.setOnClickListener { this.onClickDayView(20) }
+        this.viewBinding.dayOfMonthText21.setOnClickListener { this.onClickDayView(21) }
+        this.viewBinding.dayOfMonthText22.setOnClickListener { this.onClickDayView(22) }
+        this.viewBinding.dayOfMonthText23.setOnClickListener { this.onClickDayView(23) }
+        this.viewBinding.dayOfMonthText24.setOnClickListener { this.onClickDayView(24) }
+        this.viewBinding.dayOfMonthText25.setOnClickListener { this.onClickDayView(25) }
+        this.viewBinding.dayOfMonthText26.setOnClickListener { this.onClickDayView(26) }
+        this.viewBinding.dayOfMonthText27.setOnClickListener { this.onClickDayView(27) }
+        this.viewBinding.dayOfMonthText28.setOnClickListener { this.onClickDayView(28) }
+        this.viewBinding.dayOfMonthText29.setOnClickListener { this.onClickDayView(29) }
+        this.viewBinding.dayOfMonthText30.setOnClickListener { this.onClickDayView(30) }
+        this.viewBinding.dayOfMonthText31.setOnClickListener { this.onClickDayView(31) }
+        this.viewBinding.dayOfMonthText32.setOnClickListener { this.onClickDayView(32) }
+        this.viewBinding.dayOfMonthText33.setOnClickListener { this.onClickDayView(33) }
+        this.viewBinding.dayOfMonthText34.setOnClickListener { this.onClickDayView(34) }
+        this.viewBinding.dayOfMonthText35.setOnClickListener { this.onClickDayView(35) }
+        this.viewBinding.dayOfMonthText36.setOnClickListener { this.onClickDayView(36) }
+        this.viewBinding.dayOfMonthText37.setOnClickListener { this.onClickDayView(37) }
+        this.viewBinding.dayOfMonthText38.setOnClickListener { this.onClickDayView(38) }
+        this.viewBinding.dayOfMonthText39.setOnClickListener { this.onClickDayView(39) }
+        this.viewBinding.dayOfMonthText40.setOnClickListener { this.onClickDayView(40) }
+        this.viewBinding.dayOfMonthText41.setOnClickListener { this.onClickDayView(41) }
+        this.viewBinding.dayOfMonthText42.setOnClickListener { this.onClickDayView(42) }
+    }
+
+    private fun onClickDayView(cellIndex: Int) {
+        val selectedDate = this.getDateForCellIndex(cellIndex)
+        this.selectedDay = selectedDate
+
+        this.onDateSelectListener?.onDateSelected(selectedDate)
     }
 
     private fun updateCalendarDisplayedContents() {
@@ -231,6 +317,7 @@ class HighlightableCalendarView @JvmOverloads constructor(
         this.setMonthDayTexts()
         this.highlightCurrentDay()
         this.decorateMonthDays()
+        this.highlightSelectedDay()
     }
 
     private fun setMonthTitle() {
@@ -413,6 +500,17 @@ class HighlightableCalendarView @JvmOverloads constructor(
                 textColor = decorator.textColor,
                 backgroundColor = decorator.backgroundColor
             )
+        }
+    }
+
+    private fun highlightSelectedDay() {
+        val selectedDay = this.selectedDay?.removeTime()
+        if (selectedDay != null) {
+            val cellIndex = this.getIndexOfCellForDate(selectedDay)
+            val dayView = this.getDayViewForCellIndex(cellIndex)
+
+            dayView.setBackgroundColor(this.selectedDayBackgroundColor)
+            dayView.setTextColor(this.selectedDayTextColor)
         }
     }
 

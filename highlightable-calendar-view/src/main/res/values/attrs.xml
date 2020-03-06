@@ -35,7 +35,8 @@
         <attr name="weekDay_backgroundColor" format="color" />
         <attr name="weekDay_textColor" format="color" />
 
-        <attr name="dayBackgroundColorSelected" format="color" />
-        <attr name="dayTextColorSelected" format="color" />
+        <!-- Specify colors for selected day -->
+        <attr name="selectedDay_backgroundColor" format="color" />
+        <attr name="selectedDay_textColor" format="color" />
     </declare-styleable>
 </resources>

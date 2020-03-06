@@ -1,10 +1,12 @@
 package com.varunbarad.highlightable_calender_view.sample
 
 import android.os.Bundle
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import com.varunbarad.highlightable_calendar_view.DayDecorator
 import com.varunbarad.highlightable_calendar_view.HighlightableCalendarView
+import com.varunbarad.highlightable_calendar_view.OnDateSelectListener
 import java.util.*
 
 class MainActivity : AppCompatActivity() {
@@ -30,5 +32,17 @@ class MainActivity : AppCompatActivity() {
                 ContextCompat.getColor(this, R.color.colorAccent)
             )
         )
+
+        calendarView.onDateSelectListener = OnDateSelectListener { selectedDate ->
+            Toast.makeText(
+                this,
+                "${selectedDate.get(Calendar.YEAR)} - ${selectedDate.getDisplayName(
+                    Calendar.MONTH,
+                    Calendar.LONG,
+                    Locale.getDefault()
+                )} - ${selectedDate.get(Calendar.DAY_OF_MONTH)}",
+                Toast.LENGTH_SHORT
+            ).show()
+        }
     }
 }

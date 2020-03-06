@@ -20,5 +20,6 @@
     <color name="day_textColor_enabled">@color/black</color>
     <color name="day_backgroundColor_enabled">@color/white</color>
 
-    <color name="day_backgroundColor_selected">#03a7e9</color>
+    <color name="selectedDay_backgroundColor">@color/darkGrey</color>
+    <color name="selectedDay_textColor">@color/white</color>
 </resources>
