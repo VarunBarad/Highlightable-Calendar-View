@@ -31,11 +31,13 @@
         <!-- Specify color for month-change buttons -->
         <attr name="titleMonthChangeButtonTint" format="color" />
 
+        <!-- Specify background color for week-days -->
+        <attr name="weekDay_backgroundColor" format="color" />
+
         <attr name="dayOfWeekTextColor" format="color" />
         <attr name="dayOfMonthTextColor" format="color" />
         <attr name="calendarBackgroundColor" format="color" />
         <attr name="dayBackgroundColorSelected" format="color" />
         <attr name="dayTextColorSelected" format="color" />
-        <attr name="weekLayoutBackgroundColor" format="color" />
     </declare-styleable>
 </resources>

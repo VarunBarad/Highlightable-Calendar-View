@@ -52,6 +52,14 @@ class HighlightableCalendarView @JvmOverloads constructor(
         }
 
     @ColorInt
+    var weekDayBackgroundColor: Int =
+        ContextCompat.getColor(this.context, R.color.weekDay_backgroundColor)
+        set(value) {
+            field = value
+            this.updateCalendarDisplayedContents()
+        }
+
+    @ColorInt
     var dayTextColorCurrentDay: Int =
         ContextCompat.getColor(this.context, R.color.day_textColor_currentDay)
         set(value) {
@@ -174,6 +182,12 @@ class HighlightableCalendarView @JvmOverloads constructor(
                 R.styleable.HighlightableCalendarView_titleMonthChangeButtonTint,
                 ContextCompat.getColor(this.context, R.color.title_monthChangeButtonTint)
             )
+
+            this.weekDayBackgroundColor = attributeValues.getColor(
+                R.styleable.HighlightableCalendarView_weekDay_backgroundColor,
+                ContextCompat.getColor(this.context, R.color.weekDay_backgroundColor)
+            )
+
             this.dayTextColorCurrentDay = attributeValues.getColor(
                 R.styleable.HighlightableCalendarView_dayTextColorCurrentDay,
                 ContextCompat.getColor(this.context, R.color.day_textColor_currentDay)
@@ -339,6 +353,8 @@ class HighlightableCalendarView @JvmOverloads constructor(
                     context.resources.getString(R.string.label_dayOfWeek_short_friday)
             }
         }
+
+        this.viewBinding.weekLayout.setBackgroundColor(this.weekDayBackgroundColor)
     }
 
     private fun setMonthDayTexts() {

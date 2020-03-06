@@ -21,5 +21,6 @@
         app:layout_constraintTop_toTopOf="parent"
         app:titleBackgroundColor="@color/colorAccent"
         app:titleMonthChangeButtonTint="@color/colorPrimary"
-        app:titleTextColor="@color/colorPrimary" />
+        app:titleTextColor="@color/colorPrimary"
+        app:weekDay_backgroundColor="@color/colorPrimaryDark" />
 </androidx.constraintlayout.widget.ConstraintLayout>
