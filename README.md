@@ -13,3 +13,23 @@ Currently it supports following features:
 - Set custom start-of-week day. It defaults to Sunday.
 - Event callbacks for month-change and date-select.
 - Highlighting individual days' text and background colors with decorators.
+
+## Adding in your project
+
+__Step 1:__ Add the JitPack repository to your root-level `build.gradle` file.
+
+```groovy
+repositories {
+    maven { url "https://jitpack.io" }
+    ...
+}
+```
+
+__Step 2:__ Add the dependency in your module-level `build.gradle`
+
+```groovy
+dependencies {
+    implementation "com.varunbarad:highlightable-calendar-view:1.0.0"
+    ...
+}
+```
