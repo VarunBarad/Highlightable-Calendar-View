@@ -1,5 +1,6 @@
 package com.varunbarad.highlightable_calender_view.sample
 
+import android.graphics.Color
 import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -20,17 +21,17 @@ class MainActivity : AppCompatActivity() {
         calendarView.dayDecorators = listOf(
             DayDecorator(
                 Calendar.getInstance().apply {
-                    add(Calendar.DAY_OF_MONTH, -1)
+                    set(Calendar.DAY_OF_MONTH, 4)
                 },
-                ContextCompat.getColor(this, R.color.colorAccent),
-                ContextCompat.getColor(this, R.color.colorPrimary)
+                Color.parseColor("#ffffff"),
+                Color.parseColor("#ff0000")
             ),
             DayDecorator(
                 Calendar.getInstance().apply {
-                    add(Calendar.DAY_OF_MONTH, 3)
+                    set(Calendar.DAY_OF_MONTH, 20)
                 },
-                ContextCompat.getColor(this, R.color.colorPrimary),
-                ContextCompat.getColor(this, R.color.colorAccent)
+                ContextCompat.getColor(this, R.color.colorAccent),
+                ContextCompat.getColor(this, R.color.colorPrimary)
             )
         )
 
