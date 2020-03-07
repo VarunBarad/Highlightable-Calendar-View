@@ -36,31 +36,34 @@ class MainActivity : AppCompatActivity() {
         )
 
         calendarView.onMonthChangeListener = OnMonthChangeListener { oldMonth, newMonth ->
+            val oldMonthDisplay = oldMonth.getDisplayName(
+                Calendar.MONTH,
+                Calendar.LONG,
+                Locale.getDefault()
+            )
+            val newMonthDisplay = newMonth.getDisplayName(
+                Calendar.MONTH,
+                Calendar.LONG,
+                Locale.getDefault()
+            )
+
             Toast.makeText(
                 this,
-                "${oldMonth.getDisplayName(
-                    Calendar.MONTH,
-                    Calendar.LONG,
-                    Locale.getDefault()
-                )} -> ${newMonth.getDisplayName(
-                    Calendar.MONTH,
-                    Calendar.LONG,
-                    Locale.getDefault()
-                )}",
+                "$oldMonthDisplay -> $newMonthDisplay",
                 Toast.LENGTH_SHORT
             ).show()
         }
 
         calendarView.onDateSelectListener = OnDateSelectListener { selectedDate ->
-            Toast.makeText(
-                this,
-                "${selectedDate.get(Calendar.YEAR)} - ${selectedDate.getDisplayName(
-                    Calendar.MONTH,
-                    Calendar.LONG,
-                    Locale.getDefault()
-                )} - ${selectedDate.get(Calendar.DAY_OF_MONTH)}",
-                Toast.LENGTH_SHORT
-            ).show()
+            val date = String.format("%02d", selectedDate.get(Calendar.DAY_OF_MONTH))
+            val month = selectedDate.getDisplayName(
+                Calendar.MONTH,
+                Calendar.LONG,
+                Locale.getDefault()
+            )
+            val year = selectedDate.get(Calendar.YEAR).toString()
+
+            Toast.makeText(this, "$month $date, $year", Toast.LENGTH_SHORT).show()
         }
     }
 }
